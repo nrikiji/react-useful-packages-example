@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "react-query";
-import { AppRoutes } from "./Router";
+import { Router } from "./Router";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -13,7 +13,7 @@ const queryClient = new QueryClient({
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <AppRoutes />
+      <Router />
     </QueryClientProvider>
   );
 };

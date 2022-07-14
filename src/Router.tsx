@@ -1,47 +1,36 @@
-import React, { FC } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, Outlet } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import { useAppSelector } from "./app/hooks";
 import { selectToken } from "./features/auth/authSlice";
 
-export const AppRoutes = () => {
+export const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <PrivateRoute>
-              <Home />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <PublicRoute>
-              <Login />
-            </PublicRoute>
-          }
-        />
+        <Route element={<PrivateRoute />}>
+          <Route path="/" element={<Home />} />
+        </Route>
+        <Route element={<PublicRoute />}>
+          <Route path="/login" element={<Login />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
 };
 
-const PublicRoute: FC<{ children: React.ReactNode }> = (props) => {
+const PublicRoute = () => {
   const currentToken = useAppSelector(selectToken);
   if (currentToken) {
     return <Navigate to="/" />;
   }
-  return <>{props.children}</>;
+  return <Outlet />;
 };
 
-const PrivateRoute: FC<{ children: React.ReactNode }> = (props) => {
+const PrivateRoute = () => {
   const currentToken = useAppSelector(selectToken);
   if (!currentToken) {
     return <Navigate to="/login" />;
   }
-  return <>{props.children}</>;
+  return <Outlet />;
 };

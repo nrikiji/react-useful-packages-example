@@ -19,7 +19,7 @@ client.interceptors.request.use((request) => {
 });
 
 client.interceptors.response.use((response) => {
-  if (response.status == 403) {
+  if (response.status === 403) {
     store.dispatch(clearToken());
   }
   return response;

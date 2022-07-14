@@ -1,0 +1,19 @@
+name: Run Test
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - uses: actions/checkout@v2
+      - name: npm run test
+        run: |
+          npm ci
+          npm run test

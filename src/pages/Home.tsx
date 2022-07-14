@@ -13,9 +13,7 @@ const Home = () => {
   return (
     <>
       <h1>Users</h1>
-      <a href="#" onClick={(e) => dispatch(clearToken())}>
-        Logout
-      </a>
+      <button onClick={(e) => dispatch(clearToken())}>Logout</button>
       <ul>
         {users?.map((user) => (
           <li key={user.id}>
