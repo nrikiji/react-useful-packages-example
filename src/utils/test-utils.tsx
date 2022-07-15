@@ -25,9 +25,11 @@ export function renderWithProviders(
   function Wrapper({ children }: PropsWithChildren<{}>): JSX.Element {
     const queryClient = new QueryClient();
     return (
-      <QueryClientProvider client={queryClient}>
-        <Provider store={store}>{children}</Provider>
-      </QueryClientProvider>
+        <Provider store={store}>
+          <QueryClientProvider client={queryClient}>
+          {children}
+          </QueryClientProvider>
+        </Provider>
     );
   }
 
